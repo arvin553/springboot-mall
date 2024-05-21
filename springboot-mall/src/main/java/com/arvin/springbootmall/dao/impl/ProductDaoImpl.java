@@ -1,5 +1,6 @@
 package com.arvin.springbootmall.dao.impl;
 
+import com.arvin.springbootmall.constant.ProductCategory;
 import com.arvin.springbootmall.dao.ProductDao;
 import com.arvin.springbootmall.dto.ProductRequest;
 import com.arvin.springbootmall.model.Product;
@@ -24,13 +25,23 @@ public class ProductDaoImpl implements ProductDao {
 
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductCategory category,String search) {
         String sql = "SELECT product_id,product_name, category, image_url, price, stock, description," +
                 " created_date, last_modified_date " +
-                "FROM product";
+                "FROM product WHERE 1=1";  //用於拼接下面的sql語句
         Map<String,Object> map = new HashMap<>();
 
-        List<Product> productList = namedParameterJdbcTemplate.query(sql, new ProductRowMapper());
+        if(category != null){
+            sql += " AND category=:category";
+            map.put("category", category.name());
+        }
+
+        if(search != null){
+            sql += " AND product_name LIKE :search";
+            map.put("search","%" + search + "%");
+        }
+
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
         return productList;
     }
