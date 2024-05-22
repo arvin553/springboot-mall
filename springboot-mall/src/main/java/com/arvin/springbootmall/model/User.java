@@ -1,12 +1,19 @@
 package com.arvin.springbootmall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class User {
 
     private Integer userId;
+
     private String email;
-    private String password;
+
+    @JsonIgnore
+    private String password; //不返回密碼
+
     private Date createDate;
     private Date lastModifiedDate;
 
