@@ -1,14 +1,17 @@
 package com.arvin.springbootmall.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 
     private Integer orderId;
     private Integer userId;
     private Integer totalAmount;
-    private Date createDate;
+    private Date createdDate;
     private Date lastModifiedDate;
+
+    private List<OrderItem> orderItemsList;
 
     public Integer getOrderId() {
         return orderId;
@@ -35,11 +38,11 @@ public class Order {
     }
 
     public Date getCreateDate() {
-        return createDate;
+        return createdDate;
     }
 
     public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+        this.createdDate = createDate;
     }
 
     public Date getLastModifiedDate() {
@@ -48,5 +51,13 @@ public class Order {
 
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public List<OrderItem> getOrderItemsList() {
+        return orderItemsList;
+    }
+
+    public void setOrderItemsList(List<OrderItem> orderItemsList) {
+        this.orderItemsList = orderItemsList;
     }
 }
